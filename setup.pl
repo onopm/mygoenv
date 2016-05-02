@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use English;
 use File::Spec;
-use Time::Piece;
 use File::Basename;
 use Term::ANSIColor;
 
