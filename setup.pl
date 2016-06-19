@@ -11,16 +11,16 @@ use Term::ANSIColor;
 #my $go1_4_src = 'https://storage.googleapis.com/golang/go1.4.3.src.tar.gz';
 
 ## URL github
-my $go1_6_src = 'https://github.com/golang/go/archive/go1.6.2.tar.gz';
+my $go_install_src = 'https://github.com/golang/go/archive/go1.6.2.tar.gz';
 my $go1_4_src = 'https://github.com/golang/go/archive/go1.4.3.tar.gz';
 
-my $go_install_version = go_version($go1_6_src); # go1.6
+my $go_install_version = go_version($go_install_src); # go1.6, go1.7beta2
 
 my $env_home = $ENV{HOME};
 my $go_install_dir = "$env_home/local/$go_install_version";
 
 print "Go install => $go_install_dir\n"; 
-if(-d $go_install_dir){
+if(-d $go_install_dir && -x "$go_install_dir/bin/go"){
     print "already exists go_install_dir\n";
     print_go_env();
     exit;
@@ -40,9 +40,12 @@ if(!-d $go14_install_dir){
     print colored("retry $0",'green')."\n";
     exit;
 }
+else {
+    print "GOROOT_BOOTSTRAP => $go14_install_dir\n";
+}
 
-# build go 1.6
-my $tarball = download($go1_6_src);
+# build go 1.x
+my $tarball = download($go_install_src);
 $ENV{GOROOT_BOOTSTRAP} = "$go14_install_dir";
 go_build($tarball, $go_install_dir);
 
