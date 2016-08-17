@@ -11,7 +11,7 @@ use Term::ANSIColor;
 #my $go1_4_src = 'https://storage.googleapis.com/golang/go1.4.3.src.tar.gz';
 
 ## URL github
-my $go_install_src = 'https://github.com/golang/go/archive/go1.6.2.tar.gz';
+my $go_install_src = 'https://github.com/golang/go/archive/go1.7.tar.gz';
 my $go1_4_src = 'https://github.com/golang/go/archive/go1.4.3.tar.gz';
 
 my $go_install_version = go_version($go_install_src); # go1.6, go1.7beta2

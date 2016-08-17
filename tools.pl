@@ -5,6 +5,8 @@ use English;
 use File::Spec;
 use File::Basename;
 
+my $force_install = 0;
+
 my @get_url = qw{
     github.com/nsf/gocode
     github.com/motemen/ghq
@@ -12,6 +14,8 @@ my @get_url = qw{
     github.com/peco/peco/cmd/peco
 };
 
+my $arg = shift;
+$force_install = 1 if $arg eq '-f';
 
 my $go_path = "$ENV{HOME}/go";
 my $env_go_path = $ENV{GOPATH} || '';
@@ -29,8 +33,12 @@ for my $url (@get_url){
         }
     }
 
-    if( which($name) ){
-        print "already installed [$name] or $install_cmd\n";
+    if( $force_install){
+        print "install [$name].\n$install_cmd\n";
+        system 'go','get', '-f', '-v', '-u', $url;
+    }
+    elsif( which($name) ){
+        print "already installed [$name]. $install_cmd or $0 -f\n";
     }
     else {
         print "install [$name].\n$install_cmd\n";
