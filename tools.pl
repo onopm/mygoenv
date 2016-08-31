@@ -14,7 +14,7 @@ my @get_url = qw{
     github.com/peco/peco/cmd/peco
 };
 
-my $arg = shift;
+my $arg = shift || '';
 $force_install = 1 if $arg eq '-f';
 
 my $go_path = "$ENV{HOME}/go";
